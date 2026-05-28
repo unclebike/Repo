@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HUDski Dealer Activation — The Plan</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Spline+Sans+Mono:wght@400;500;600&family=Newsreader:ital,opsz@0,6..72;1,6..72&display=swap');
+
+  :root {
+    --ink: #1a1a17;
+    --paper: #efe9dc;
+    --paper-2: #e4ddcc;
+    --rust: #c04a25;
+    --rust-deep: #8f3417;
+    --moss: #4a5a3a;
+    --moss-light: #6b7a52;
+    --gold: #c89a3c;
+    --sky: #3a5a6b;
+    --line: #c2b79e;
+    --shadow: rgba(26,26,23,0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(26,26,23,0.04) 1px, transparent 0);
+    background-size: 22px 22px;
+    line-height: 1.5;
+    padding: 0 0 80px;
+  }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+
+  /* ---- Header ---- */
+  header {
+    border-bottom: 2px solid var(--ink);
+    padding: 38px 0 26px;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .kicker {
+    font-family: 'Spline Sans Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rust);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .kicker::before {
+    content: "";
+    width: 26px; height: 2px; background: var(--rust);
+  }
+  h1 {
+    font-size: clamp(34px, 6vw, 62px);
+    line-height: 0.96;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    max-width: 18ch;
+  }
+  h1 em { font-family: 'Newsreader', serif; font-style: italic; font-weight: 400; color: var(--rust-deep); }
+  .sub {
+    margin-top: 18px;
+    font-size: 17px;
+    max-width: 60ch;
+    color: #3c3a33;
+  }
+  .meta-row {
+    margin-top: 22px;
+    display: flex; flex-wrap: wrap; gap: 8px 22px;
+    font-family: 'Spline Sans Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.05em;
+    color: #6a6453;
+    text-transform: uppercase;
+  }
+  .meta-row span b { color: var(--ink); font-weight: 600; }
+
+  /* ---- Section heads ---- */
+  .section-head {
+    margin: 54px 0 22px;
+    display: flex; align-items: baseline; gap: 14px;
+  }
+  .section-head .num {
+    font-family: 'Spline Sans Mono', monospace;
+    font-size: 13px;
+    color: var(--rust);
+    border: 1.5px solid var(--rust);
+    border-radius: 50%;
+    width: 30px; height: 30px;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .section-head h2 {
+    font-size: 24px; font-weight: 800; letter-spacing: -0.01em;
+  }
+  .section-head p {
+    font-size: 14px; color: #6a6453; margin-left: auto; max-width: 38ch; text-align: right;
+  }
+
+  /* ---- Value hierarchy stack ---- */
+  .stack { display: flex; flex-direction: column; gap: 4px; }
+  .layer {
+    position: relative;
+    border: 1.5px solid var(--ink);
+    background: var(--paper-2);
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+    overflow: hidden;
+  }
+  .layer:hover { transform: translateX(6px); box-shadow: -6px 6px 0 var(--shadow); }
+  .layer.l0 { background: var(--moss); color: var(--paper); margin: 0 18% 0 0; }
+  .layer.l1 { background: var(--paper-2); margin: 0 12% 0 4%; }
+  .layer.l2 { background: var(--paper-2); margin: 0 6% 0 8%; }
+  .layer.l3 { background: var(--paper-2); margin: 0 0 0 12%; }
+  .layer .ltag {
+    font-family: 'Spline Sans Mono', monospace;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    opacity: 0.7; margin-bottom: 5px;
+  }
+  .layer .lmain { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+  .layer .ldetail {
+    font-size: 14px; margin-top: 8px; max-width: 64ch; display: none; color: inherit; opacity: 0.92;
+  }
+  .layer.open .ldetail { display: block; animation: fade .3s ease; }
+  .layer .plus {
+    position: absolute; top: 16px; right: 18px;
+    font-family: 'Spline Sans Mono', monospace; font-size: 18px; opacity: 0.5;
+  }
+  @keyframes fade { from { opacity: 0; transform: translateY(-4px);} to {opacity: .92; transform: none;} }
+
+  /* ---- Timeline ---- */
+  .timeline { position: relative; margin-top: 10px; }
+  .phase {
+    border: 1.5px solid var(--ink);
+    background: var(--paper-2);
+    margin-bottom: 22px;
+    position: relative;
+  }
+  .phase-head {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 22px;
+    border-bottom: 1.5px dashed var(--line);
+  }
+  .phase-badge {
+    font-family: 'Spline Sans Mono', monospace;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 5px 11px; border-radius: 2px; font-weight: 600;
+    flex-shrink: 0;
+  }
+  .phase.now .phase-badge { background: var(--rust); color: var(--paper); }
+  .phase.fall .phase-badge { background: var(--sky); color: var(--paper); }
+  .phase-head h3 { font-size: 21px; font-weight: 800; letter-spacing: -0.01em; }
+  .phase-head .when {
+    margin-left: auto; font-family: 'Spline Sans Mono', monospace;
+    font-size: 12px; color: #6a6453; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .jobs { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  @media (max-width: 680px){ .jobs { grid-template-columns: 1fr; } }
+  .job {
+    padding: 18px 22px;
+    border-right: 1.5px dashed var(--line);
+    border-bottom: 1.5px dashed var(--line);
+  }
+  .job:nth-child(2n) { border-right: none; }
+  .jobs .job:nth-last-child(-n+1):nth-child(odd) { border-bottom: none; }
+  .job .jnum {
+    font-family: 'Spline Sans Mono', monospace; font-size: 11px;
+    color: var(--rust); letter-spacing: 0.1em; margin-bottom: 6px;
+  }
+  .phase.fall .job .jnum { color: var(--sky); }
+  .job h4 { font-size: 16px; font-weight: 600; margin-bottom: 5px; }
+  .job p { font-size: 13.5px; color: #4a473d; }
+  .deliverable {
+    display: inline-block; margin-top: 9px;
+    font-family: 'Spline Sans Mono', monospace; font-size: 10.5px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 3px 8px; border: 1px solid var(--line); border-radius: 2px;
+    color: #6a6453;
+  }
+
+  /* connector */
+  .connector { display: grid; place-items: center; margin: -12px 0 10px; }
+  .connector span {
+    font-family: 'Spline Sans Mono', monospace; font-size: 20px; color: var(--line);
+  }
+
+  /* ---- Archetypes ---- */
+  .arch-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+  @media (max-width: 680px){ .arch-grid { grid-template-columns: 1fr; } }
+  .arch {
+    border: 1.5px solid var(--ink); background: var(--paper-2);
+    padding: 18px 20px; position: relative;
+    transition: box-shadow .18s ease, transform .18s ease;
+  }
+  .arch:hover { box-shadow: -5px 5px 0 var(--shadow); transform: translate(2px,-2px); }
+  .arch.core { background: var(--gold); }
+  .arch .atag {
+    font-family: 'Spline Sans Mono', monospace; font-size: 10.5px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--rust-deep);
+    margin-bottom: 8px; display: flex; gap: 8px; align-items: center;
+  }
+  .arch.core .atag { color: var(--ink); font-weight: 600; }
+  .arch h4 { font-size: 18px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .arch .story {
+    font-family: 'Newsreader', serif; font-style: italic; font-size: 15px;
+    line-height: 1.45; color: #3c3a33; margin-bottom: 10px;
+  }
+  .arch .vals { display: flex; flex-wrap: wrap; gap: 5px; }
+  .arch .val {
+    font-size: 11px; padding: 2px 8px; background: rgba(26,26,23,0.07);
+    border-radius: 2px; font-family: 'Spline Sans Mono', monospace;
+  }
+  .arch .replaces {
+    margin-top: 10px; font-size: 12.5px; color: var(--moss);
+  }
+  .arch .replaces b { color: var(--rust-deep); }
+
+  /* ---- Venn center callout ---- */
+  .venn {
+    margin-top: 16px; border: 2px solid var(--ink); background: var(--moss);
+    color: var(--paper); padding: 22px 26px; text-align: center;
+  }
+  .venn .vt { font-family: 'Spline Sans Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.75; margin-bottom: 8px;}
+  .venn .vm { font-size: clamp(20px,3.4vw,30px); font-weight: 800; letter-spacing: -0.01em; }
+  .venn .vm em { font-family: 'Newsreader', serif; font-style: italic; font-weight: 400; color: var(--gold); }
+
+  footer {
+    margin-top: 56px; border-top: 2px solid var(--ink); padding-top: 18px;
+    font-family: 'Spline Sans Mono', monospace; font-size: 11px;
+    color: #6a6453; letter-spacing: 0.05em; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  }
+  .hint {
+    font-family: 'Spline Sans Mono', monospace; font-size: 11px; color: var(--rust);
+    letter-spacing: 0.05em; margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Dismount × HUDski · Distribution Plan</div>
+    <h1>Selling the <em>one-bike</em> idea to dealers across Canada.</h1>
+    <p class="sub">A phased activation system — the deck that does the selling, plus the tool that lets each shop see their own fit. Here's the structure, what ships when, and who we're actually talking to.</p>
+    <div class="meta-row">
+      <span><b>Owner:</b> Nathan &amp; Pat</span>
+      <span><b>Format:</b> PDF deck + interactive configurator</span>
+      <span><b>Horizon:</b> Move now, refine for fall</span>
+    </div>
+  </header>
+
+  <!-- VALUE HIERARCHY -->
+  <div class="section-head">
+    <div class="num">1</div>
+    <h2>The information hierarchy</h2>
+    <p>What the deck establishes, in order. Tap any layer.</p>
+  </div>
+  <div class="stack" id="stack">
+    <div class="layer l0" data-i>
+      <div class="ltag">Foundation</div>
+      <div class="lmain">It's a mountain bike that also crushes gravel &amp; bikepacking.</div>
+      <span class="plus">+</span>
+      <div class="ldetail">Not a gravel bike that dabbles in trails — an all-terrain bike built on MTB geometry. Long reach, short stem, wide bars, low BB. Reviewers consistently say it "rides like a modern hardtail." That's the thing that makes it fun, and fun is what a drop-bar bike can't fake.</div>
+    </div>
+    <div class="layer l1" data-i>
+      <div class="ltag">Layer 02 · The math</div>
+      <div class="lmain">One bike replaces two or three in the lineup.</div>
+      <span class="plus">+</span>
+      <div class="ldetail">For the customer: one maintenance rhythm, one parts family, one machine instead of a quiver. For the dealer: a single premium SKU absorbs the work of several margin-diluting entry-to-mid bikes.</div>
+    </div>
+    <div class="layer l2" data-i>
+      <div class="ltag">Layer 03 · The people</div>
+      <div class="lmain">Three customer stories: joy, simplification, access.</div>
+      <span class="plus">+</span>
+      <div class="ldetail">The same frame sells three different ways depending on who's standing in the shop. The deck arms staff to recognize which story they're telling — and to tell it in their own words.</div>
+    </div>
+    <div class="layer l3" data-i>
+      <div class="ltag">Layer 04 · The business case</div>
+      <div class="lmain">Higher margin, fewer SKUs, a brand staff actually love.</div>
+      <span class="plus">+</span>
+      <div class="ldetail">A niche, culturally credible brand that does the work of several lower-margin products. Dealers can't out-breadth the big-box shops — but they can carry the bike people are obsessed with.</div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section-head">
+    <div class="num">2</div>
+    <h2>Jobs to be done — phased</h2>
+    <p>Build momentum now. Refine once supply &amp; season are clear.</p>
+  </div>
+
+  <div class="timeline">
+    <div class="phase now">
+      <div class="phase-head">
+        <span class="phase-badge">Phase 01 — Now</span>
+        <h3>Get the story moving</h3>
+        <span class="when">Next few weeks</span>
+      </div>
+      <div class="jobs">
+        <div class="job">
+          <div class="jnum">JOB 01</div>
+          <h4>Lock the narrative</h4>
+          <p>Nathan &amp; Pat articulate how they actually talk about HUDski when they demo it. That becomes the philosophical spine.</p>
+          <span class="deliverable">Owner input → me</span>
+        </div>
+        <div class="job">
+          <div class="jnum">JOB 02</div>
+          <h4>Build the PDF deck</h4>
+          <p>Credibility layer: brand story, the one-bike thesis, the three customer stories, the dealer business case.</p>
+          <span class="deliverable">PDF · 12–15 pages</span>
+        </div>
+        <div class="job">
+          <div class="jnum">JOB 03</div>
+          <h4>Bake positioning into the deck</h4>
+          <p>Even before a live configurator, the deck shows the "replace 2–3 bikes" logic with worked examples from a real lineup.</p>
+          <span class="deliverable">Static fit-map</span>
+        </div>
+        <div class="job">
+          <div class="jnum">JOB 04</div>
+          <h4>Equip the staff</h4>
+          <p>Talking points framed as permission, not script — so staff demo with genuine enthusiasm and feed off each other.</p>
+          <span class="deliverable">Narrative section</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><span>↓</span></div>
+
+    <div class="phase fall">
+      <div class="phase-head">
+        <span class="phase-badge">Phase 02 — Fall</span>
+        <h3>The full program</h3>
+        <span class="when">Tied to product / supply timing</span>
+      </div>
+      <div class="jobs">
+        <div class="job">
+          <div class="jnum">JOB 05</div>
+          <h4>Interactive microsite</h4>
+          <p>Dealers plug in their current price points &amp; gaps; the tool shows exactly which models HUDski replaces in their mix.</p>
+          <span class="deliverable">Configurator</span>
+        </div>
+        <div class="job">
+          <div class="jnum">JOB 06</div>
+          <h4>Incorporate early signal</h4>
+          <p>Fold in what actually resonated with the first dealers — sharpen the stories that converted.</p>
+          <span class="deliverable">Feedback loop</span>
+        </div>
+        <div class="job">
+          <div class="jnum">JOB 07</div>
+          <h4>Align to season &amp; container</h4>
+          <p>Map the pitch to factory schedules and pre-buy windows so dealer commitments land when stock can.</p>
+          <span class="deliverable">Supply-aware</span>
+        </div>
+        <div class="job">
+          <div class="jnum">JOB 08</div>
+          <h4>Demo enablement</h4>
+          <p>Get bikes under staff so they aspire to own one. The brand sells itself when the people selling it want it.</p>
+          <span class="deliverable">Demo fleet</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARCHETYPES -->
+  <div class="section-head">
+    <div class="num">3</div>
+    <h2>Who's actually buying</h2>
+    <p>Five archetypes. One frame. The gold card is the core crossover.</p>
+  </div>
+
+  <div class="arch-grid">
+    <div class="arch core">
+      <div class="atag">◆ Core crossover</div>
+      <h4>The Gravel MTBer</h4>
+      <div class="story">"I came to gravel from mountain biking, but drop bars bore me. I don't want two bikes — or to spend $4K on a Cutthroat to feel less fun."</div>
+      <div class="vals"><span class="val">fun-first</span><span class="val">versatility</span><span class="val">one machine</span></div>
+      <div class="replaces">Replaces: <b>a hardtail + a gravel bike</b></div>
+    </div>
+
+    <div class="arch">
+      <div class="atag">○ Crossover</div>
+      <h4>The Consolidator</h4>
+      <div class="story">"I own three bikes and hate it. I want one that genuinely performs everywhere — I'll spec and maintain it well."</div>
+      <div class="vals"><span class="val">simplify</span><span class="val">craft</span><span class="val">no compromise</span></div>
+      <div class="replaces">Replaces: <b>MTB + bikepacking rig</b></div>
+    </div>
+
+    <div class="arch">
+      <div class="atag">○ Entry</div>
+      <h4>The Life-Stage Shift</h4>
+      <div class="story">"New kid, want to feel young again. I'm not 'a cyclist' yet — I don't want to pick a lane before I know who I am."</div>
+      <div class="vals"><span class="val">low friction</span><span class="val">access</span><span class="val">explore</span></div>
+      <div class="replaces">Lands on: <b>Doggler, gravel build</b></div>
+    </div>
+
+    <div class="arch">
+      <div class="atag">○ Returner</div>
+      <h4>The Lapsed Rider</h4>
+      <div class="story">"I loved my hardtail ten years ago. I want to ride again without learning drop-bar geometry or starting over."</div>
+      <div class="vals"><span class="val">nostalgia</span><span class="val">familiar</span><span class="val">playful</span></div>
+      <div class="replaces">Replaces: <b>a dated hardtail</b></div>
+    </div>
+  </div>
+
+  <div class="venn">
+    <div class="vt">Where every archetype overlaps</div>
+    <div class="vm">One versatile bike that <em>actually performs</em> — not a compromise.</div>
+  </div>
+
+  <footer>
+    <span>Working visual · for Nathan &amp; Pat</span>
+    <span>v0.1 — structure for alignment</span>
+  </footer>
+  <div class="hint">Tip: tap the hierarchy layers to expand · hover the cards</div>
+</div>
+
+<script>
+  document.querySelectorAll('.layer').forEach(function(l){
+    l.addEventListener('click', function(){
+      l.classList.toggle('open');
+      var p = l.querySelector('.plus');
+      if(p) p.textContent = l.classList.contains('open') ? '–' : '+';
+    });
+  });
+</script>
+</body>
+</html>
