@@ -1,477 +1,83 @@
-<!Doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>{% if is_home %}{{ site.author }}{% elif is_post %} {{ post.title }} {% elif is_link %} {{ link.title }} {% elif is_tag %} {{ tag }} {% elif is_page %} {{ page.title }} {% endif %} | {{ site.name }}</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="description" content="{{ site.bio|striptags }} - {{ site.author }}" />
-	<meta name="dcterms.rightsHolder" content="Copyright (c) 2013 {{ site.author }}" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1b3a2f" />
+  <title>Baja Cape Loop · Trip Plan</title>
+  <meta name="description" content="Shared trip-planning HQ for 3 riders taking on the Baja Cape Loop in January: interactive route map, day-by-day itinerary, 3-rider gear redundancy, and a readiness tracker." />
 
-	<meta property="og:site_name" content="{{ site.name }}" />
-	{% if is_post %}
-	<meta property="article:published_time" content="{{ post.created_at }}" />
-	{% if post.tags %}
-	{% for tag in post.tags %}
-	<meta property="article:tag" content="{{ tag|format_tag(link=False, humanize=True) }}" />
-	{% endfor %}
-	{% endif %}
-	{% if post.photos %}
-	{% for photo in post.photos %}
-	{% if loop.index == 1 and photo %}
-	<meta property="og:image" content="{{ photo.width_400 }}" />
-	{% else %}
-	<meta property="og:image" content="{{ site.avatar }}" />
-	{% endif %}
-	{% endfor %}
-	{% endif %}
-	<meta property="og:type" content="article" />
-	<meta property="og:title" content="{{ post.title }}" />
-	<meta property="og:url" content="{{ site.base_url }}{{ post.permalink }}" />
-	<meta property="og:description" content="{{ post.content|striptags|truncate(255)|e }}" />
-	{% elif is_page %}
-	<meta property="og:image" content="{{ site.avatar }}" />
-	<meta property="og:type" content="article" />
-	<meta property="og:title" content="{{ page.title }}" />
-	<meta property="og:url" content="{{ site.base_url }}{{ page.permalink }}" />
-	<meta property="og:description" content="{{ page.content|striptags|truncate(255)|e }}" />
-	{% else %}
-	<meta property="og:image" content="{{ site.avatar }}" />
-	<meta property="og:type" content="website" />
-	<meta property="og:title" content="{{ site.name }}" />
-	<meta property="og:url" content="{{ site.base_url }}" />
-	<meta property="og:description" content="{{ site.bio|striptags }}" />
-	{% endif %}
-
-	<meta name="twitter:card" content="summary">
-	<meta name="twitter:site" content="@{{ site.twitter }}">
-	{% if is_post %}
-	<meta name="twitter:title" content="{{ post.title }}">
-	<meta name="twitter:description" content="{{ post.content|striptags|truncate(255)|e }}...">
-	{% elif is_page %}
-	<meta name="twitter:title" content="{{ page.title }}">
-	<meta name="twitter:description" content=" {{ page.content|striptags|truncate(255)|e }}...">
-	{% else %}
-	<meta name="twitter:title" content="{{ site.name }}">
-	<meta name="twitter:description" content="{{ site.bio|striptags|truncate(255)|e }}...">
-	{% endif %}
-	<meta name="twitter:creator" content="@{{ site.twitter }}">
-	<meta name="twitter:image:src" content="{{ site.avatar }}">
-	<meta name="twitter:domain" content="{{ site.base_url }}">
-	
-	<link rel="shortcut icon" href="http://www.iconj.com/ico/8/a/8ajittswcl.ico" type="image/x-icon" />
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="https://rawgithub.com/kamisama/cal-heatmap/master/cal-heatmap.css">
-	<link rel="stylesheet" type="text/css" href="https://rawgithub.com/kyletaylored/Repo/master/css/global.css">
-	<!-- <link rel="stylesheet" type="text/css" href="http://sandbox/global.css"> -->
-	<link href="{{ static('mediaelement/mediaelementplayer.css') }}" rel="stylesheet" />
-
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="//d3js.org/d3.v3.min.js"></script>
-	<script type="text/javascript" src="https://rawgithub.com/kamisama/cal-heatmap/master/cal-heatmap.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
-
-	<script type="text/javascript">
-	// Here you can set some custom information about yourself!
-	// Things like where you're from, what you're good at, etc.
-	var personal_info = {
-		"position" : "Developer & Startup Evangelist",
-		"specialties" : "Drupal, Javascript, LESS",
-		"location" : "Dallas, Texas",
-		"email" : "kyletaylored@gmail.com",
-	};
-
-	// Other social network links.
-	var socialLinks = [
-	{
-		"service" : "Instagram",
-		"username" : "KyleTaylored",
-		"url" : "http://instagram.com/kyletaylored",
-		"icon" : "icon-instagram"
-	},
-	{
-		"service" : "Github",
-		"username" : "KyleTaylored",
-		"url" : "http://github.com/kyletaylored",
-		"icon" : "icon-github"
-	}
-	];
-
-	// Fun word stats.
-	var num_posts = 0;
-	var num_words = 0;
-	var num_tags = 0;
-	var calEvents = {};
-
-	{% if posts %}
-	{% for post in posts %}
-	{% if post.content|striptags|wordcount > 0 %} {% set num_words = post.content|striptags|wordcount %} {% endif %}
-	num_posts += 1;
-	num_words = num_words + parseInt({{ num_words }});
-	{% endfor %}
-	{% endif %}
-	
-	{% for tag in site.tags %}
-	num_tags+=1;
-	{% endfor %}
-
-	// Add values to localStorage for future reference, updating incrementally.
-	if(typeof(Storage)!=="undefined") {
-		console.log("Yay, you have web storage! I think I left my watch in here somewhere...")
-		if (!localStorage.num_posts || num_posts > localStorage.num_posts) {
-			localStorage.num_posts = num_posts;
-		}
-		if (!localStorage.num_words || num_words > localStorage.num_words) {
-			if (num_words > 99999) {num_words = num_words.toExponential(3)};
-			localStorage.num_words = num_words;
-		}
-		if (!localStorage.num_tags || num_tags > localStorage.num_tags) {
-			localStorage.num_tags = num_tags;
-		}
-	} else {
-		console.log("Sorry, no web storage for you. :(");
-	}
-
-	$(document).ready(function(){
-		// Set counts on page.
-		document.querySelector(".tag-count .value").innerHTML= localStorage.num_tags;
-		document.querySelector(".post-count .value").innerHTML= localStorage.num_posts;
-		document.querySelector(".word-count .value").innerHTML= numberWithCommas(localStorage.num_words);
-		
-		// Add personal information and icons.
-		if (personal_info) {
-			for(var index in personal_info) {
-				var icon, item;
-				var value = personal_info[index];
-
-				switch (index) {
-					case "position":
-					icon = "icon-briefcase";
-					break;
-					case "specialties":
-					icon = "icon-code";
-					break;
-					case "location":
-					icon = "icon-map-marker";
-					break;
-					case "email":
-					icon = "icon-rocket";
-					break;
-				}
-				if (index == "email") {
-					item = '<li><i class="'+icon+'"></i><a href= "mailto:'+value+'">'+value+'</a></li>';
-				} else {
-					item = '<li><i class="'+icon+'"></i>'+value+'</li>';
-				}
-				$(".personal-info").append(item);
-			}
-		}
-
-		if (socialLinks) {
-			var $social_menu = $('.social-btns li').last();
-			for (index in socialLinks) {
-				var new_social = '<li><a href="'+socialLinks[index]['url']+
-				'" title="'+socialLinks[index]['service']+'-'+socialLinks[index]['username']+
-				'" target="_blank"><i class="'+socialLinks[index]['icon']+'"></i></a></li>';
-				$social_menu.before(new_social);
-			}
-		}
-
-	});
-function numberWithCommas(x) {
-	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-</script>
+  <link rel="preconnect" href="https://api.mapbox.com" />
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.9.0/mapbox-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/styles.css" />
 </head>
-
 <body>
-	<!-- I see you like to look at source code :) Me too! -->
-	<div class="navigation col-md-12">
-		<nav role="navigation" id="nav" class="container navbar navbar-default">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="/"><i class="icon-off"></i></a>
-			</div>
-			<ul class="navbar-left collapse navbar-collapse navbar-ex1-collapse no-list-style">
-				<li><a href="/" class="home">Home</a></li>
-				{% if pages %}
-				{% for page in pages %}
-				<li><a href="{{ page.permalink }}">{{ page.title }}</a></li>
-				{% endfor %}
-				{% endif %}
-			</ul>
-			<ul class="social-btns navbar-right navbar-nav no-list-style">
-				<li>{% if site.twitter %}<a href="http://twitter.com/{{ site.twitter }}" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>{% endif %}</li>
-				<li>{% if site.facebook %}<a href="http://facebook.com/{{ site.facebook }}" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>{% endif %}</li>
-				<li>{% if site.googleplus %}<a href="https://plus.google.com/{{ site.googleplus }}?rel=author" rel="author" title="Google+" target="_blank"><i class="icon-google-plus"></i></a>{% endif %}</li>
-				<li>{% if site.linkedin %}<a href="{{ site.linkedin }}" title="Linkedin" target="_blank"><i class="icon-linkedin"></i></a>{% endif %}</li>
-				<li><a href="{{ site.atom_url }}" title="RSS" target="_blank"><i class="icon-rss"></i></a></li>
-			</ul>
-		</nav>
-	</div>
-	<div class="container">
-		<div class="col-md-3">
-			<header class="site-header">
-				<div class="logo">
-					<a href="/"><img class="avatar" src="{{ site.avatar }}" alt="{{ site.author }}" /></a>
-				</div>
-				<h1 class="site-author">{{ site.author }}</h1>
-				<div class="site-name">{{ site.name }}</div>
-				<hr />
-				<p class="description">
-					{{site.bio}}
-				</p>
-				<hr />
-				<ul class="personal-info no-list-style">
+  <a class="skip-link" href="#main">Skip to content</a>
 
-				</ul>
-				<hr />
-				<ul class="blog-stats no-list-style">
-					<li class="post-count">
-						<div class="value">0</div>
-						<div class="type">Posts</div>
-					</li>
-					<li class="word-count">
-						<div class="value">0</div>
-						<div class="type">Words</div>
-					</li>
-					<li class="tag-count">
-						<div class="value">0</div>
-						<div class="type">Tags</div>
-					</li>
-				</ul>
-				<hr />
-				<div id="cal-heatmap"></div>
-				<script type="text/javascript">
-				var cal = new CalHeatMap();
-				var start_date, start_month, start_year, now_month, now_year, now;
-				now = new Date();
-				now_year = now.getFullYear();
-				now_month = now.getMonth();
-				switch (now_month) {
-					case 0:
-					start_month = 10;
-					start_year = now_year - 1;
-					break;
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">▟▖</span>
+        <div class="brand-text">
+          <h1>Baja Cape Loop</h1>
+          <p class="brand-sub">3 riders · ~284 mi · clockwise · January</p>
+        </div>
+      </div>
+      <nav class="tabs" aria-label="Sections">
+        <button class="tab is-active" data-tab="map" id="tab-map">Map</button>
+        <button class="tab" data-tab="itinerary" id="tab-itinerary">Itinerary</button>
+        <button class="tab" data-tab="gear" id="tab-gear">Gear</button>
+        <button class="tab" data-tab="readiness" id="tab-readiness">Readiness</button>
+      </nav>
+    </div>
+  </header>
 
-					case 1:
-					start_month = 11;
-					start_year = now_year - 1;
-					break;
+  <main id="main">
+    <!-- MAP ---------------------------------------------------------------->
+    <section class="panel is-active" id="panel-map" aria-labelledby="tab-map">
+      <div class="map-shell">
+        <div id="map" role="application" aria-label="Interactive route map"></div>
+        <div class="map-controls" id="map-controls" hidden>
+          <p class="map-controls-title">Layers</p>
+          <label class="switch"><input type="checkbox" id="toggle-cerritos" /> <span>Los Cerritos detour</span></label>
+          <label class="switch"><input type="checkbox" id="toggle-shortcut" /> <span>La Paz shortcut</span></label>
+          <details class="legend">
+            <summary>Resupply legend</summary>
+            <ul id="legend-list"></ul>
+          </details>
+        </div>
+        <div class="map-fallback" id="map-fallback" hidden>
+          <div class="map-fallback-card">
+            <h2>Map needs a Mapbox token</h2>
+            <p>The route map renders once a public Mapbox token is set in <code>js/config.js</code>. The rest of the plan — itinerary, gear, and readiness — works without it.</p>
+            <p class="muted">Dry-carry stretches and resupply points are also listed on the <button class="linklike" data-jump="itinerary">Itinerary</button> tab.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-					default:
-					start_month = now_month - 2;
-					start_year = now_year;
-					break;
-				}
-				start_date = new Date(start_year, start_month);
+    <!-- ITINERARY ---------------------------------------------------------->
+    <section class="panel" id="panel-itinerary" aria-labelledby="tab-itinerary" hidden>
+      <div class="wrap" id="itinerary-root"><p class="loading">Loading itinerary…</p></div>
+    </section>
 
-				cal.init({
-					itemSelector: "#cal-heatmap",
-					domain: "month",
-					start: start_date,
-					minDate: start_date,
-					maxDate: now,
-					subDomain: "day",
-					range: 3,
-					displayLegend: false
-				});
+    <!-- GEAR --------------------------------------------------------------->
+    <section class="panel" id="panel-gear" aria-labelledby="tab-gear" hidden>
+      <div class="wrap" id="gear-root"><p class="loading">Loading gear…</p></div>
+    </section>
 
-				
-				</script>
-			</header>
+    <!-- READINESS ---------------------------------------------------------->
+    <section class="panel" id="panel-readiness" aria-labelledby="tab-readiness" hidden>
+      <div class="wrap" id="readiness-root"><p class="loading">Loading readiness…</p></div>
+    </section>
+  </main>
 
-		</div>
-		<div role="main" class="main col-md-9">
-			<div class="block">
-				<a href="#nav" id="toggle" class="block" aria-hidden="true"></a>
-			</div>
-			<div class="content">
+  <footer class="footer">
+    <p>Static planning site · no accounts, no tracking, no data saved to your device. Checkbox state lives in the URL. Route &amp; resupply data baked from the RideWithGPS collection + Resupply Sheet.</p>
+  </footer>
 
-				{% if is_home or is_tag %}
-				{% if posts %}
-				<section class="posts">
-					{% if is_tag %}
-					<h2>Tag: {{ tag }}</h2>
-					<hr />
-					{% endif %}
-					{% for post in posts %}
-					<article itemscope itemtype="http://schema.org/Article" class="summary">
-						<header class="article-header">
-							<h2 class="title">
-								<a href="{{ post.permalink }}">{{ post.title }}</a><span class="article-icon"><i class="icon-file-text"></i></span>
-							</h2>
-						</header>
-						<div class="article-content">
-							<div class="article-info">
-								<div class="post-date">
-									<div>{{ site.author }} authored on <span class="date-info">{{ post.created_at|format_date }}</span></div>
-								</div>
-							</div>
-							{% if post.content|striptags|wordcount > 0 %}
-							<p class="desc">{{ post.content|striptags|truncate(500) }}</p>
-							<div class="article-footer">
-								{% endif %}
-								{% if post.tags %}
-								<div class="tags">
-									{% for tag in post.tags %}
-									<div class="tag">{{ tag|format_tag }}</div>
-									{% endfor %}
-								</div>
-								{% endif %}
-								<div class="post-hash"><a href="{{ post.permalink }}" class="btn btn-default article-read-more">Read More <span class="hash-arrow"><i class="icon-arrow-right"></i></span></a></div>
-							</div>
-						</div>
-					</article>
-					{% endfor %}
-				</section>
-				{% if not is_tag %}
-				<div class="pagination">
-					{% if pagination.prev %}<a href="{{ pagination.prev }}" class="post-prev">&larr; View Previous Posts</a>{% endif %}
-					{% if pagination.next %}<a href="{{ pagination.next }}" class="post-next">View More Posts &rarr;</a>{% endif %}
-				</div>
-				{% endif %}
-				{% else %}
-				<p class="no-posts"><em>No posts yet :(</em></p>
-				{% endif %}
-				{% elif is_post %}
-				<article itemscope itemtype="http://schema.org/Article" class="post">
-					<header class="title">
-						<h2>{{ post.title }}</h2>
-						<p class="post-date">Published by {{ site.author }} on {{ post.created_at|format_date }}</p>
-					</header>
-					<div>
-						<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
-							<a class="addthis_button_facebook"></a>
-							<a class="addthis_button_twitter"></a>
-							<a class="addthis_button_google_plusone_share"></a>
-							<a class="addthis_button_linkedin"></a>
-							<a class="addthis_button_buffer"></a>
-							<a class="addthis_button_email"></a>
-							<a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
-						</div>
-					</div>
-					<section class="content">
-						{{ post.content }}
-						{% if post.tags %}
-						<div class="article-footer">
-							<div class="tags">
-								{% for tag in post.tags %}
-								<div class="tag">{{ tag|format_tag }}</div>
-								{% endfor %}
-							</div>
-						</div>
-						{% endif %}
-					</section>
-					{% if site.disqus %}
-					<hr />
-					<section class="comments">
-						<div id="disqus_thread"></div>
-						<script type="text/javascript">
-						var disqus_shortname = '{{ site.disqus }}';
-						(function() {
-							var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-							dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-							(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-						})();
-						</script>
-						<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-						<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-					</section>
-					{% endif %}
-				</article>
-				{% elif is_link %}
-				<article itemscope itemtype="http://schema.org/Article" class="post">
-					<header class="title">
-						<h2>{{ link.title }}</h2>
-						<p class="post-date">Published by {{ site.author }} on {{ link.created_at|format_date }}</p>
-					</header>
-					<section class="content">
-						{{ link.content }}
-						<span class="link-url"><i class="icon-share"></i> <a href="{{ link.url }}">{{ link.url }}</a></span>
-						{% if link.tags %}
-						<div class="tags">
-							{{ link.tags|format_tags(delimiter=' ') }}
-						</div>
-						{% endif %}
-					</section>
-					{% if site.disqus %}
-					<hr />
-					<section class="comments">
-						<div id="disqus_thread"></div>
-						<script type="text/javascript">
-						var disqus_shortname = '{{ site.disqus }}';
-						(function() {
-							var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-							dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-							(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-						})();
-						</script>
-						<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-						<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-					</section>
-					{% endif %}
-				</article>
-				{% elif is_page %}
-				<div class="post">
-					<header class="title">
-						<h1>{{ page.title }}</h1>
-						
-						<div class="addthis_toolbox addthis_default_style addthis_16x16_style">
-							<a class="addthis_button_facebook"></a>
-							<a class="addthis_button_twitter"></a>
-							<a class="addthis_button_google_plusone_share"></a>
-							<a class="addthis_button_linkedin"></a>
-							<a class="addthis_button_buffer"></a>
-							<a class="addthis_button_email"></a>
-							<a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
-						</div>
-					</header>
-					<hr />
-					{{ page.content }}
-				</div>
-				{% endif %}
-			</div>
-		</div>
-	</div>
-	<div class="col-md-12 site-footer">
-		<footer class="container">
-			<p class="left">All rights Reserved &copy; <a href="/">{{ site.name }}</a></p>
-			<p class="right">Powered by <a href="http://postach.io" target="_blank">Postach.io</a></p>
-		</footer>
-	</div>
-	<script src="{{ static('mediaelement/mediaelement-and-player.min.js') }}"></script>
-	<script>
-	$('audio').mediaelementplayer();
-	</script>
-
-	{% if site.analytics %}
-	<script>
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', '{{ site.analytics }}']);
-	_gaq.push(['_trackPageview']);
-	(function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
-	</script>
-	{% endif %}
-	<!-- AddThis Button BEGIN -->
-	<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5292fe2f650b189b"></script>
-	<!-- AddThis Button END -->
-
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.9.0/mapbox-gl.js"></script>
+  <script src="./js/config.js"></script>
+  <script src="./js/app.js"></script>
 </body>
 </html>
