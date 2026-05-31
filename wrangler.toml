@@ -1,0 +1,10 @@
+# Cloudflare Pages config for the Baja Cape Loop site.
+# Static site, no build step — the repo root IS the deploy output.
+#
+# Deploy:        wrangler pages deploy
+# Local preview: wrangler pages dev
+#
+# (Rename `name` to whatever you want the *.pages.dev subdomain to be.)
+name = "baja-cape-loop"
+compatibility_date = "2026-05-31"
+pages_build_output_dir = "."

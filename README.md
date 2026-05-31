@@ -58,14 +58,30 @@ resolve.)
 
 ## Deploy to Cloudflare Pages
 
+### Option A — Wrangler CLI (recommended)
+
+A `wrangler.toml` is included (`pages_build_output_dir = "."`, no build command),
+and `.assetsignore` keeps the upload to just the site (no repo tooling/docs):
+
+```bash
+wrangler pages deploy          # deploys the repo root
+wrangler pages dev             # local preview
+```
+
+First run will prompt you to create/select the Pages project (the subdomain
+comes from `name` in `wrangler.toml` — rename it if you like).
+
+### Option B — Dashboard / Git integration
+
 1. Push this repo to GitHub (or connect it directly).
 2. In Cloudflare Pages → **Create project** → connect the repo.
 3. Build settings:
    - **Framework preset:** `None`
    - **Build command:** *(leave empty — there is no build)*
    - **Build output directory:** `/` (the repo root)
-4. Deploy. Asset paths are root-relative (`./css`, `./js`, `./public/data`), so
-   they resolve correctly on Pages.
+
+Either way, asset paths are root-relative (`./css`, `./js`, `./public/data`), so
+they resolve correctly on Pages.
 
 After the first deploy, set your Mapbox token by editing `js/config.js` and
 pushing — or, if you prefer not to commit a token, leave the placeholder and the
