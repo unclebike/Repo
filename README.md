@@ -58,27 +58,38 @@ resolve.)
 
 ## Deploy to Cloudflare Pages
 
-### Option A — Wrangler CLI (recommended)
+### Option A — Auto-deploy on git push (Git integration)
+
+One-time setup in the Cloudflare dashboard, then every push publishes itself:
+
+1. Cloudflare → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**.
+2. Pick the **`unclebike/Repo`** repository and authorize access.
+3. **Production branch:** the branch you want to go live (e.g. `master`, or the
+   feature branch while it's in review). Other branches get preview URLs.
+4. Build settings:
+   - **Framework preset:** `None`
+   - **Build command:** *(leave empty — there is no build)*
+   - **Build output directory:** `.` — already declared in `wrangler.toml`
+     (`pages_build_output_dir = "."`), so Cloudflare picks it up automatically.
+5. **Save and Deploy.**
+
+After that, `git push` to the production branch auto-deploys to
+`baja-loop-plan.pages.dev`; pushes to other branches get preview deployments.
+`.assetsignore` and `_headers` are honored by the Git build too.
+
+> Set your Mapbox token in `js/config.js` and push — that's what lights up the
+> Map tab on the deployed site.
+
+### Option B — Manual Wrangler CLI
 
 A `wrangler.toml` is included (`pages_build_output_dir = "."`, no build command),
-and `.assetsignore` keeps the upload to just the site (no repo tooling/docs):
+and `.assetsignore` keeps the upload to just the site:
 
 ```bash
+wrangler login                 # one-time
 wrangler pages deploy          # deploys the repo root
 wrangler pages dev             # local preview
 ```
-
-First run will prompt you to create/select the Pages project (the subdomain
-comes from `name` in `wrangler.toml` — rename it if you like).
-
-### Option B — Dashboard / Git integration
-
-1. Push this repo to GitHub (or connect it directly).
-2. In Cloudflare Pages → **Create project** → connect the repo.
-3. Build settings:
-   - **Framework preset:** `None`
-   - **Build command:** *(leave empty — there is no build)*
-   - **Build output directory:** `/` (the repo root)
 
 Either way, asset paths are root-relative (`./css`, `./js`, `./public/data`), so
 they resolve correctly on Pages.
