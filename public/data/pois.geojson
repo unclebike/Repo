@@ -1,0 +1,245 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "San Jos\u00e9 del Cabo",
+    "services": "FWMCRB$ Bus Airport",
+    "is_dry_carry_start": false,
+    "notes": "Trip start (drop-off). Full resupply, ATMs, small bike shop in town + high-end Specialized dealer at the south end. Airport ~1 mi off route."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -109.708138,
+     23.157187
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Turn for Los Cerritos",
+    "services": "\u2014",
+    "is_dry_carry_start": false,
+    "notes": "Junction for the optional 16 mi round-trip detour to Playa Los Cerritos (best surf beach on the cape; beach camping)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -110.099361,
+     23.394322
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Todos Santos",
+    "services": "FWMCR$ Bus",
+    "is_dry_carry_start": true,
+    "notes": "DRY-CARRY START \u2192 El Rosario (33.7 mi / 54 km, the loop's longest dry stretch \u2014 no reliable water on the climb). Full resupply, snowbird town; good place to top off everything."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -110.224825,
+     23.447927
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "El Rosario",
+    "services": "fW",
+    "is_dry_carry_start": false,
+    "notes": "Limited food + water, a few miles before the pavement. First reliable water after the long Todos Santos climb."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -110.111923,
+     23.743117
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Turn to El Triunfo",
+    "services": "fWR",
+    "is_dry_carry_start": false,
+    "notes": "El Triunfo is 1.5 mi east of the route \u2014 restored mining town, several small stores and two sit-down eateries. Important resupply."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -110.108719,
+     23.803542
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Los Divisaderos",
+    "services": "fW",
+    "is_dry_carry_start": false,
+    "notes": "Limited food + water on the scenic dirt road before the long descent into La Paz."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -110.141867,
+     23.892376
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "La Paz",
+    "services": "FWMCRB$ Bus Airport",
+    "is_dry_carry_start": true,
+    "notes": "DRY-CARRY START \u2192 Los Divisaderos (30.3 mi / 49 km, climbing out of La Paz). Rest-day hub \u2014 whale shark tours, full resupply, ATMs, bike shop, capital of BCS."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -110.318773,
+     24.160276
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "San Juan de los Planes",
+    "services": "FWR",
+    "is_dry_carry_start": false,
+    "notes": "Food, water, restaurant. Last good resupply before the rocky coastal road to the East Cape."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -109.936038,
+     23.967308
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "El Cardonal",
+    "services": "fWMCR",
+    "is_dry_carry_start": false,
+    "notes": "Limited food, water, motel, camping, restaurant along the scenic Sea of Cortez coast road."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -109.750058,
+     23.845672
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Punta Pescadero",
+    "services": "M",
+    "is_dry_carry_start": false,
+    "notes": "Motel only \u2014 no reliable food resupply."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -109.702229,
+     23.797527
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Los Barriles",
+    "services": "FWMCRB$ Bus",
+    "is_dry_carry_start": false,
+    "notes": "Largest East Cape resupply: full grocery (turn up the main street for the supermarket), ATM, bike shop. Load up here AND La Ribera before Cabo Pulmo."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -109.703827,
+     23.679174
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "La Ribera",
+    "services": "FWMR",
+    "is_dry_carry_start": true,
+    "notes": "DRY-CARRY START \u2192 Cabo Pulmo (20.1 mi / 32 km). Cabo Pulmo is limited \u2014 load PAST it here. Food, water, motel, restaurant."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -109.584194,
+     23.59757
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Cabo Pulmo",
+    "services": "fWMR limited",
+    "is_dry_carry_start": true,
+    "notes": "DRY-CARRY START \u2192 Palo Escopeta (26.2 mi / 42 km, big climb day, only a tiny stop at the end). No grocery \u2014 just two restaurants. World-class snorkeling + favorite singletrack."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -109.429609,
+     23.437482
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Turn to Playa El Arbolitos",
+    "services": "CR",
+    "is_dry_carry_start": false,
+    "notes": "Junction for Playa Los Arbolitos \u2014 beach camping, showers, scenic snorkeling coves, occasional fish tacos & water."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -109.437959,
+     23.402798
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "Palo Escopeta",
+    "services": "fW",
+    "is_dry_carry_start": false,
+    "notes": "Tiny store, limited hours. Last stop before the descent back to San Jos\u00e9 del Cabo (~10 mi further)."
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -109.582628,
+     23.220597
+    ]
+   }
+  }
+ ]
+}

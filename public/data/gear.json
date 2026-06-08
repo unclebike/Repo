@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "riders": ["Rider A", "Rider B", "Rider C"],
+    "tubeless_callout": "TUBELESS TIRES ARE MANDATORY. Cactus spines will shred tubes on this route. Riders run 27.5×2.8 plus — in-spec and adequate. Run sealant fresh and carry plugs.",
+    "water_callout": "Per-rider water capacity for THIS loop is 4–6 L. Near-full bottles are only needed on the flagged dry stretches — the longest is ~34 mi / 54 km (Todos Santos → El Rosario). The big remote-desert water figures you'll read for the full Baja Divide are for sections that are NOT on the Cape Loop. Do not over-pack water for this route.",
+    "season_note": "January: warm days, cold nights at elevation. Sleep + layers must handle ~40°F / 5°C nights."
+  },
+  "tiers": [
+    {
+      "id": 1,
+      "name": "Tier 1 — Per-rider",
+      "subtitle": "Each rider carries their own. Full redundancy by default — no single point of failure.",
+      "items": [
+        { "name": "Sleep system (~40°F / 5°C)", "detail": "Bag/quilt + pad rated for cold nights at elevation.", "carriers": ["A", "B", "C"], "shared": false },
+        { "name": "Water capacity 4–6 L", "detail": "Bottles/bladder totaling 4–6 L. Carry near-full only on the four flagged dry stretches.", "carriers": ["A", "B", "C"], "shared": false },
+        { "name": "Personal first aid", "detail": "Blister care, meds, personal scripts, ibuprofen, electrolytes.", "carriers": ["A", "B", "C"], "shared": false },
+        { "name": "Cold-night layers", "detail": "Insulated jacket, warm hat, gloves, long layers for ~40°F nights.", "carriers": ["A", "B", "C"], "shared": false },
+        { "name": "Headlamp + spare batteries", "detail": "Camp + emergency night riding.", "carriers": ["A", "B", "C"], "shared": false },
+        { "name": "Nutrition", "detail": "Snacks/calories to cover the longest stretch between resupply.", "carriers": ["A", "B", "C"], "shared": false },
+        { "name": "Phone + charging", "detail": "Offline maps + this site downloaded. Cable + plug.", "carriers": ["A", "B", "C"], "shared": false },
+        { "name": "ID + cash (pesos)", "detail": "Passport, cash for towns without ATMs, card. ATMs only in the bigger towns.", "carriers": ["A", "B", "C"], "shared": false },
+        { "name": "Sun protection", "detail": "Sunscreen, lip balm, sun hoody/sleeves, sunglasses — desert sun is relentless.", "carriers": ["A", "B", "C"], "shared": false },
+        { "name": "Chemical water tabs", "detail": "Per-rider backup to the shared filter — everyone carries tabs.", "carriers": ["A", "B", "C"], "shared": false }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Tier 2 — Shared-once",
+      "subtitle": "One carrier for the whole group. SINGLE POINT OF FAILURE — if that rider bails, the group loses it. Assign carriers explicitly before departure.",
+      "items": [
+        { "name": "Satellite communicator (inReach)", "detail": "At least one in the group — HIGHEST-PRIORITY shared item. No cell coverage on long stretches; this is the emergency lifeline. Strongly consider a second device for redundancy.", "carriers": ["C"], "shared": true, "priority": true },
+        { "name": "Stove + gasoline-compatible fuel", "detail": "Run a stove that burns gasoline — alcohol/canister fuel is hard to source in Baja per bikepacking.com. Refill gas in towns.", "carriers": ["A"], "shared": true },
+        { "name": "Pot / cook kit", "detail": "One pot for the group; pairs with the stove carrier.", "carriers": ["A"], "shared": true },
+        { "name": "Primary trauma kit", "detail": "Group-level trauma: tourniquet, pressure dressing, wound care — beyond personal first aid.", "carriers": ["B"], "shared": true }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Tier 3 — Redundant-shared",
+      "subtitle": "Carried by 2 of 3 riders so one rider bailing doesn't strip the group of a critical repair item.",
+      "items": [
+        { "name": "Tubeless plug kit + spare sealant", "detail": "Plugs for cactus punctures + sealant to refresh/refill.", "carriers": ["A", "B"], "shared": true },
+        { "name": "Pump (2×)", "detail": "Two pumps in the group — tubeless reseating needs volume.", "carriers": ["A", "C"], "shared": true },
+        { "name": "Spare tubes", "detail": "Backup even on tubeless — for sidewall gashes plugs won't hold.", "carriers": ["B", "C"], "shared": true },
+        { "name": "Chain links + chain tool", "detail": "Quick links + tool to fix a broken chain.", "carriers": ["A", "B"], "shared": true },
+        { "name": "Derailleur hanger (per-rider, bike-specific)", "detail": "Hangers are frame-specific — EACH rider carries their own. Listed here because a bent hanger is a trip-ender otherwise.", "carriers": ["A", "B", "C"], "shared": false },
+        { "name": "Multitool", "detail": "Hex/torx + driver set.", "carriers": ["A", "C"], "shared": true },
+        { "name": "Brake pads", "detail": "Spare pads — long sandy descents eat them.", "carriers": ["B", "C"], "shared": true },
+        { "name": "Spokes + spare cable", "detail": "Spoke wrench, a few spokes, a shift/brake cable.", "carriers": ["A", "C"], "shared": true },
+        { "name": "Voile straps", "detail": "Field fixes for racks, loads, splints — endlessly useful.", "carriers": ["A", "B"], "shared": true },
+        { "name": "Zip ties + tape", "detail": "Gorilla/electrical tape + assorted zip ties.", "carriers": ["B", "C"], "shared": true },
+        { "name": "Water filter", "detail": "One filter for the group (everyone also carries chemical tabs as Tier-1 backup).", "carriers": ["A"], "shared": true }
+      ]
+    }
+  ]
+}

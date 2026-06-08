@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "title": "Readiness — now → January",
+    "persistence_note": "Checkboxes are NOT saved to your device (no storage is used). Your progress lives in the page URL — use “Copy shareable link” to save it or share the current state with the other riders.",
+    "trip_month": "January"
+  },
+  "phases": [
+    {
+      "id": "p1",
+      "name": "Phase 1 — Now → August",
+      "subtitle": "Lock the trip in. Peak season books out — act early.",
+      "items": [
+        { "id": "p1a", "label": "Confirm all 3 riders are committed (dates + budget)." },
+        { "id": "p1b", "label": "Book transport to Baja + drop-off/pickup (January is peak season — book early)." },
+        { "id": "p1c", "label": "Tubeless conversion for anyone still running tubes." },
+        { "id": "p1d", "label": "Agree the clockwise route + the 9.5-day / 1-rest-day plan." },
+        { "id": "p1e", "label": "Divvy up Tier 2 / Tier 3 shared gear — who carries the inReach, stove, trauma kit?" }
+      ]
+    },
+    {
+      "id": "p2",
+      "name": "Phase 2 — September → October",
+      "subtitle": "Shake the rig down loaded, then close the gaps it reveals.",
+      "items": [
+        { "id": "p2a", "label": "Loaded shakedown overnighter on the ACTUAL rigs (full kit, full water)." },
+        { "id": "p2b", "label": "Buy redundancy gaps the shakedown reveals." },
+        { "id": "p2c", "label": "Verify cold-rated sleep systems handle ~40°F / 5°C nights." },
+        { "id": "p2d", "label": "Confirm 4–6 L water capacity per rider works with the chosen bags/cages." },
+        { "id": "p2e", "label": "Dial bike fit + contact points over a long day before it matters." }
+      ]
+    },
+    {
+      "id": "p3",
+      "name": "Phase 3 — November → December",
+      "subtitle": "Logistics + paperwork + a fresh track.",
+      "items": [
+        { "id": "p3a", "label": "Re-download the current GPX — the route has live reroutes." },
+        { "id": "p3b", "label": "Confirm entry docs + Mexican tourist permit (FMM) for all 3 riders." },
+        { "id": "p3c", "label": "Arrange bike-box transport + Ventanas basecamp staging." },
+        { "id": "p3d", "label": "Confirm drop-off logistics for the San José del Cabo start." },
+        { "id": "p3e", "label": "Download offline maps + this site to every phone." }
+      ]
+    },
+    {
+      "id": "p4",
+      "name": "Phase 4 — Final 2 weeks",
+      "subtitle": "Mechanical + power + print.",
+      "items": [
+        { "id": "p4a", "label": "Sealant top-up on all tires." },
+        { "id": "p4b", "label": "Drivetrain / brake pads / tires inspected + serviced." },
+        { "id": "p4c", "label": "Device-charging / battery-bank plan confirmed (inReach, phones, lights)." },
+        { "id": "p4d", "label": "Print offline materials (gear checklist + 1-page itinerary brief)." },
+        { "id": "p4e", "label": "Final shared-gear check — confirm who is actually carrying what." }
+      ]
+    }
+  ]
+}

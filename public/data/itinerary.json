@@ -1,0 +1,238 @@
+{
+  "overview": {
+    "title": "Baja Cape Loop",
+    "subtitle": "9.5 riding days + 1 rest day · clockwise · January",
+    "riders": 3,
+    "direction": "Clockwise: San José del Cabo → Todos Santos → La Paz → East Cape → Cabo Pulmo → San José del Cabo",
+    "total_mi": 284,
+    "total_km": 457,
+    "total_gain_m": 6175,
+    "total_gain_ft": 20259,
+    "season": "January — peak season. Highs ~70s°F / lows ~50s°F; cold nights at elevation.",
+    "logistics": "Riders are NOT flying in. Dropped off at the San José del Cabo start; finish near Cabo (Ventanas basecamp) where bike boxes / gear are staged. Day 1 is a full riding day — there is no fly-in half day and no Cabo-lodging finish day.",
+    "tubeless": "Tubeless tires are MANDATORY (cactus spines). Riders run 27.5×2.8 plus, which is in-spec.",
+    "source_note": "Daily structure from Sarah Swallow's 11-day itinerary, adjusted for drop-off/basecamp logistics. Distances/dry-carry gaps from the Resupply Sheet. Distances are planning estimates derived from RWGPS section totals."
+  },
+  "days": [
+    {
+      "day": 1,
+      "title": "San José del Cabo → Sierra de la Laguna",
+      "from": "San José del Cabo",
+      "to": "Camp on Las Naranjas road",
+      "distance_mi": 30,
+      "distance_km": 48,
+      "gain_ft": 4101,
+      "gain_m": 1250,
+      "surface": "Pavement → dirt climb",
+      "is_rest": false,
+      "is_hard": false,
+      "highlights": [
+        "Full riding day from the drop-off — no fly-in half day.",
+        "Climb Las Naranjas road, one of the only roads through the Sierra de la Laguna.",
+        "Low pass, descent, then a higher second pass with Pacific Ocean views."
+      ],
+      "camp": "Wild camp near the pass / upper Las Naranjas road.",
+      "water_note": "Top off fully in San José del Cabo — no services on the climb.",
+      "shortcut": null
+    },
+    {
+      "day": 2,
+      "title": "Descend to Todos Santos",
+      "from": "Las Naranjas road",
+      "to": "Todos Santos",
+      "distance_mi": 26,
+      "distance_km": 42,
+      "gain_ft": 1148,
+      "gain_m": 350,
+      "surface": "Dirt descent → undulating",
+      "is_rest": false,
+      "is_hard": false,
+      "highlights": [
+        "Long, fun descent down the west side of the mountains.",
+        "Undulating run into Todos Santos, a snowbird favorite with real community.",
+        "Full resupply + internet before the longest dry carry of the loop."
+      ],
+      "camp": "Todos Santos (motels / camping) — FWMCR$.",
+      "water_note": "Resupply town. Fill EVERY bottle here for tomorrow's dry carry.",
+      "shortcut": {
+        "name": "Playa Los Cerritos detour",
+        "detail": "16 mi round-trip to the best surf beach on the cape (board rentals, lessons, beach camping). Junction is at the Turn for Los Cerritos."
+      }
+    },
+    {
+      "day": 3,
+      "title": "Todos Santos → Sierra crossing (dry carry)",
+      "from": "Todos Santos",
+      "to": "Camp near Valle Perdido / El Rosario",
+      "distance_mi": 34,
+      "distance_km": 55,
+      "gain_ft": 3773,
+      "gain_m": 1150,
+      "surface": "Sandy farm tracks → jeep climb",
+      "is_rest": false,
+      "is_hard": true,
+      "highlights": [
+        "Dusty farm roads (close all cattle gates) climbing into the national park edge.",
+        "Sandy tracks even while climbing; old road bed rides like singletrack.",
+        "Drainage with possible water and great campsites before the pass."
+      ],
+      "camp": "Wild camp in a Sierra drainage (seasonal water) near El Rosario.",
+      "water_note": "DRY CARRY — Todos Santos → El Rosario, 33.7 mi / 54 km. The loop's longest carry; no reliable water on the climb. First reliable water at El Rosario.",
+      "dry_carry": "Todos Santos → El Rosario",
+      "shortcut": null
+    },
+    {
+      "day": 4,
+      "title": "El Triunfo → La Paz",
+      "from": "Camp near El Rosario",
+      "to": "La Paz",
+      "distance_mi": 45,
+      "distance_km": 72,
+      "gain_ft": 2297,
+      "gain_m": 700,
+      "surface": "Dirt → pavement → dirt → pavement",
+      "is_rest": false,
+      "is_hard": false,
+      "highlights": [
+        "1.5 mi detour to El Triunfo — restored mining town, stores + two sit-down eateries.",
+        "Scenic Los Divisaderos road, slowly climbing to its high point.",
+        "Finish with ~15 miles of downhill into colorful La Paz."
+      ],
+      "camp": "La Paz — hotel / hostel. FWMCRB$ Bus Airport.",
+      "water_note": "Resupply at El Triunfo (1.5 mi off route) and Los Divisaderos. Easy water into La Paz.",
+      "shortcut": null
+    },
+    {
+      "day": 5,
+      "title": "Rest day — La Paz",
+      "from": "La Paz",
+      "to": "La Paz",
+      "distance_mi": 0,
+      "distance_km": 0,
+      "gain_ft": 0,
+      "gain_m": 0,
+      "surface": "Rest",
+      "is_rest": true,
+      "is_hard": false,
+      "highlights": [
+        "Whale shark tours from the malecón (January is prime season).",
+        "Full resupply, ATMs, laundry, bike shop, real coffee + tacos.",
+        "Drivetrain check + sealant top-off before the East Cape half."
+      ],
+      "camp": "La Paz — second night.",
+      "water_note": "Rest + resupply hub. Stage water for the climb out of town tomorrow.",
+      "shortcut": null
+    },
+    {
+      "day": 6,
+      "title": "La Paz → San Juan de los Planes (climb out)",
+      "from": "La Paz",
+      "to": "San Juan de los Planes",
+      "distance_mi": 38,
+      "distance_km": 61,
+      "gain_ft": 2133,
+      "gain_m": 650,
+      "surface": "Pavement climb → dirt → sandy → pavement",
+      "is_rest": false,
+      "is_hard": false,
+      "highlights": [
+        "Paved climb out of La Paz to ~2000′, then a gorgeous dirt road down to Los Divisaderos.",
+        "Climb the ridge for spectacular views of San Juan de los Planes and the Sea of Cortez.",
+        "Sandy tracks back to pavement into San Juan de los Planes."
+      ],
+      "camp": "San Juan de los Planes (FWR) or nearby beach.",
+      "water_note": "DRY CARRY — La Paz → Los Divisaderos, 30.3 mi / 49 km, climbing out of La Paz. Carry near-full from town.",
+      "dry_carry": "La Paz → Los Divisaderos",
+      "shortcut": {
+        "name": "La Paz → San Juan de los Planes shortcut",
+        "detail": "30.5 mi paved alternate that skips the Los Divisaderos dirt climb. Faster and lower if anyone needs an easier day."
+      }
+    },
+    {
+      "day": 7,
+      "title": "East Cape coast → La Ribera",
+      "from": "San Juan de los Planes",
+      "to": "La Ribera",
+      "distance_mi": 53,
+      "distance_km": 85,
+      "gain_ft": 1804,
+      "gain_m": 550,
+      "surface": "Rough dirt → rocky coast → flat",
+      "is_rest": false,
+      "is_hard": false,
+      "highlights": [
+        "Rough dirt over the ridge to the sea, then ~15 mi of the most scenic rocky coastal road on the Baja Divide.",
+        "Resupply options at El Cardonal; near-empty coast road east of San Juan de los Planes.",
+        "Los Barriles (largest East Cape resupply) then mostly flat to La Ribera."
+      ],
+      "camp": "La Ribera (FWMR) — load up here for Cabo Pulmo.",
+      "water_note": "Plenty of resupply (El Cardonal, Los Barriles, La Ribera). Fill fully at La Ribera for tomorrow.",
+      "shortcut": null
+    },
+    {
+      "day": 8,
+      "title": "La Ribera → Cabo Pulmo (short day)",
+      "from": "La Ribera",
+      "to": "Cabo Pulmo",
+      "distance_mi": 20,
+      "distance_km": 32,
+      "gain_ft": 820,
+      "gain_m": 250,
+      "surface": "Mostly flat coast",
+      "is_rest": false,
+      "is_hard": false,
+      "highlights": [
+        "Short day on purpose — Cabo Pulmo has the best snorkeling in Baja + favorite singletrack.",
+        "National marine park; reef just offshore.",
+        "Beach camp at Los Frailes / Cabo Pulmo."
+      ],
+      "camp": "Cabo Pulmo / Los Frailes beach camp.",
+      "water_note": "DRY CARRY — La Ribera → Cabo Pulmo, 20.1 mi / 32 km. Cabo Pulmo is limited (two restaurants, no store) — LOAD PAST IT at La Ribera.",
+      "dry_carry": "La Ribera → Cabo Pulmo",
+      "shortcut": null
+    },
+    {
+      "day": 9,
+      "title": "Cabo Pulmo → Palo Escopeta (big climb)",
+      "from": "Cabo Pulmo",
+      "to": "Palo Escopeta",
+      "distance_mi": 26,
+      "distance_km": 42,
+      "gain_ft": 3609,
+      "gain_m": 1100,
+      "surface": "Sandy climb → firm dirt → drainages",
+      "is_rest": false,
+      "is_hard": true,
+      "highlights": [
+        "South of Los Frailes, the climb away from the sea is sandy for the first ~4 mi / 800′.",
+        "Firmer road above 800′, climbing past several steep drainages.",
+        "Big views of Mt. Trinidad and the Sierra de la Laguna at the top."
+      ],
+      "camp": "Wild camp near Palo Escopeta (tiny store, limited hours).",
+      "water_note": "DRY CARRY — Cabo Pulmo → Palo Escopeta, 26.2 mi / 42 km. Big climb day; only a tiny stop at the end. Carry full from Cabo Pulmo (top off at La Ribera the day before).",
+      "dry_carry": "Cabo Pulmo → Palo Escopeta",
+      "shortcut": null
+    },
+    {
+      "day": 10,
+      "title": "Palo Escopeta → finish near Cabo",
+      "from": "Palo Escopeta",
+      "to": "San José del Cabo → Ventanas basecamp",
+      "distance_mi": 12,
+      "distance_km": 19,
+      "gain_ft": 574,
+      "gain_m": 175,
+      "surface": "Long descent → pavement",
+      "is_rest": false,
+      "is_hard": false,
+      "highlights": [
+        "Long descent back to civilization at the north end of San José del Cabo.",
+        "Loop closes near the airport / Santa Anita.",
+        "Transfer to the Ventanas basecamp to break down bikes and pack boxes."
+      ],
+      "camp": "Ventanas basecamp (staging for bike boxes / gear).",
+      "water_note": "Short descent day. Water in Palo Escopeta and San José del Cabo.",
+      "shortcut": null
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+# Files Cloudflare Pages should NOT upload (gitignore-style patterns).
+# Keeps the deployed site to just the app + its data.
+.git
+.github
+node_modules
+tools
+wrangler.toml
+.assetsignore
+README.md
+public/data/data-provenance.md
